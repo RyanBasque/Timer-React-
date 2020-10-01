@@ -1,0 +1,92 @@
+.App {
+  text-align: center;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgb(238, 238, 238);
+
+  position: absolute;
+  top: 0;
+
+  box-sizing: border-box;
+}
+.container {
+  width: 80vw;
+  height: auto;
+
+  margin: 100px auto;
+  padding: 5px;
+  padding-bottom: 25px;
+
+  background-color: rgb(255, 255, 255);
+
+  border-radius: 10px;
+
+}
+.timer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  width: 80%;
+  height: 100px;
+
+  margin: 0 auto;
+}
+.dots {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  margin: 20px 0 20px 0;
+}
+.dots div {
+  background-color: black;
+
+  border-radius: 5px;
+
+  height: 8px;
+  width: 8px;
+}
+.btn {
+  width: 60%;
+  height: auto;
+  
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: space-between;
+}
+.btn button {
+  width: 80px;
+  height: 40px;
+
+  border: 0;
+  border-radius: 5px;
+
+  color: white;
+
+  cursor: pointer;
+
+  outline: thin dotted;
+  outline: 0px auto -webkit-focus-ring-color;
+  outline-offset: 0px;
+
+  transition: filter 0.2s;
+}
+.btn button:first-child {
+  background-color: green;
+}
+.btn button:hover {
+  filter: brightness(80%);
+}
+.btn button+button {
+  background-color: red;
+}
+@media (min-width: 500px) {
+  .container {
+    max-width: 500px;
+  }
+}
