@@ -43,9 +43,9 @@ class App extends Component {
             secs = secs - 1;
             this.setState({ seconds: secs });
 
-          };
+          }
 
-          if (secs === 0 && min > 0) {
+          if (parseInt(secs) === 0 && min > 0) {
             secs = 60;
             this.setState({ seconds: secs });
 
