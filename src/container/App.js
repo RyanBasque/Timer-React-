@@ -29,7 +29,7 @@ class App extends Component {
     let max = 0;
     let maxSecs = 60;
 
-    if (secs, min > 0) {
+    if (secs > 0 || min > 0) {
       if (min > 60) {
         this.setState({ minutes: 60 })
       };
@@ -39,20 +39,29 @@ class App extends Component {
 
       const timer = setInterval(
         () => {
-          if (parseInt(min) > 0 && parseInt(secs) === 0) {
-            min = min - 1;
-            this.setState({ minutes: min })
-            secs = 60;
-            this.setState({ seconds: secs })
+          if (secs > 0) {
+            secs = secs - 1;
+            this.setState({ seconds: secs });
+
           };
 
-          secs = secs - 1;
+          if (secs === 0 && min > 0) {
+            secs = 60;
+            this.setState({ seconds: secs });
 
-          if (secs === 0 && parseInt(min) > 0) {
             min = min - 1;
             this.setState({ minutes: min })
-            secs = 60;
-            this.setState({ seconds: secs })
+          }
+
+          if (min > 0) {
+            max = max + 1;
+
+            if (parseInt(max) === maxSecs) {
+              maxSecs += 60;
+              min = min - 1;
+
+              this.setState({ minutes: min })
+            }
           }
 
           if (secs === 0 && parseInt(min) === 0) {
