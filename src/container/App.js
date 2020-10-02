@@ -25,8 +25,45 @@ class App extends Component {
 
   }
 
-  initTimer = (hour, minute) => {
-    console.log(hour, minute)
+  initTimer = (min, secs) => {
+    let max = 0;
+    let maxSecs = 60;
+
+    if (secs, min > 0) {
+      if (min > 60) {
+        this.setState({ minutes: 60 })
+      };
+      if (secs > 60) {
+        this.setState({ seconds: 60 })
+      };
+
+      const timer = setInterval(
+        () => {
+          if (parseInt(min) > 0 && parseInt(secs) === 0) {
+            min = min - 1;
+            this.setState({ minutes: min })
+            secs = 60;
+            this.setState({ seconds: secs })
+          };
+
+          secs = secs - 1;
+
+          if (secs === 0 && parseInt(min) > 0) {
+            min = min - 1;
+            this.setState({ minutes: min })
+            secs = 60;
+            this.setState({ seconds: secs })
+          }
+
+          if (secs === 0 && parseInt(min) === 0) {
+            clearInterval(timer)
+          }
+
+        }, 1000
+      )
+    }
+
+
   }
 
   render() {
@@ -48,8 +85,8 @@ class App extends Component {
               second={parseInt(this.state.seconds)} />
           </div>
           <div className="btn">
-            <button onClick={this.initTimer.bind(this, this.state.minutes, this.state.seconds)}>INIT</button>
-            <button>STOP</button>
+            <button onClick={this.initTimer.bind(this, this.state.minutes, this.state.seconds)}>START</button>
+            <button onClick={this.initTimer.bind(this, this.state.minutes, this.state.seconds)}>STOP</button>
           </div>
         </div>
       </div>
