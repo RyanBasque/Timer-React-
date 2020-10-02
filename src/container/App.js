@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 import Seconds from '../components/seconds/Seconds';
 import Minutes from '../components/minutes/Minutes';
 
@@ -9,8 +10,11 @@ class App extends Component {
 
   state = {
     minutes: "00",
-    seconds: "00"
+    seconds: "00",
+    stopAlarm: false,
+    citys: {}
   };
+
 
   changeTime = (value, event) => {
     if (value === 1) {
@@ -23,18 +27,17 @@ class App extends Component {
       })
     }
 
-  }
+  };
 
   initTimer = (min, secs) => {
-    let max = 0;
-    let maxSecs = 60;
-
     if (secs > 0 || min > 0) {
       if (min > 60) {
-        this.setState({ minutes: 60 })
+        this.setState({ minutes: 60 });
+        min = 60;
       };
       if (secs > 60) {
-        this.setState({ seconds: 60 })
+        this.setState({ seconds: 60 });
+        secs = 60;
       };
 
       const timer = setInterval(
@@ -43,29 +46,23 @@ class App extends Component {
             secs = secs - 1;
             this.setState({ seconds: secs });
 
-          }
+          };
 
           if (parseInt(secs) === 0 && min > 0) {
-            secs = 60;
+            secs = 59;
             this.setState({ seconds: secs });
 
             min = min - 1;
-            this.setState({ minutes: min })
-          }
-
-          if (min > 0) {
-            max = max + 1;
-
-            if (parseInt(max) === maxSecs) {
-              maxSecs += 60;
-              min = min - 1;
-
-              this.setState({ minutes: min })
-            }
-          }
+            this.setState({ minutes: min });
+          };
 
           if (secs === 0 && parseInt(min) === 0) {
-            clearInterval(timer)
+            clearInterval(timer);
+          };
+
+          if (this.state.stopAlarm) {
+            clearInterval(timer);
+            this.setState({ stopAlarm: false });
           }
 
         }, 1000
@@ -76,6 +73,8 @@ class App extends Component {
   }
 
   render() {
+
+    document.title = `Timer (${this.state.minutes} : ${this.state.seconds})`;
 
     return (
       <div className="App">
@@ -95,7 +94,7 @@ class App extends Component {
           </div>
           <div className="btn">
             <button onClick={this.initTimer.bind(this, this.state.minutes, this.state.seconds)}>START</button>
-            <button onClick={this.initTimer.bind(this, this.state.minutes, this.state.seconds)}>STOP</button>
+            <button onClick={() => this.setState({ stopAlarm: true })}>STOP</button>
           </div>
         </div>
       </div>
