@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 import Seconds from '../components/seconds/Seconds';
 import Minutes from '../components/minutes/Minutes';
 
@@ -12,9 +11,7 @@ class App extends Component {
     minutes: "00",
     seconds: "00",
     stopAlarm: false,
-    citys: {}
   };
-
 
   changeTime = (value, event) => {
     if (value === 1) {
